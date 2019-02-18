@@ -4,6 +4,7 @@ import (
 	"encoding/xml"
 	"fmt"
 	"strings"
+	"html"
 )
 
 func (client *NetgearClient) GetAttachDevice() ([]map[string]string, error) {
@@ -34,7 +35,10 @@ func (client *NetgearClient) GetAttachDevice() ([]map[string]string, error) {
 	}
 
 	devices := make([]map[string]string, 0)
-	results := strings.Split(inside.Nodes[0].Content, "@")
+
+	/* Values are HTML encoded - this breaks the ";" splitting later */
+	data := html.UnescapeString(inside.Nodes[0].Content)
+	results := strings.Split(data, "@")
 	for i := 1; i < len(results); i++ {
 		fields := strings.Split(results[i], ";")
 

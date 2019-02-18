@@ -3,6 +3,7 @@ package netgear_client
 import (
 	"encoding/xml"
 	"fmt"
+	"html"
 )
 
 func (client *NetgearClient) GetAttachDevice2() ([]map[string]string, error) {
@@ -43,7 +44,7 @@ func (client *NetgearClient) GetAttachDevice2() ([]map[string]string, error) {
 		}
 
 		for _, infoValue := range node.Nodes {
-			infoMap[infoValue.XMLName.Local] = infoValue.Content
+			infoMap[infoValue.XMLName.Local] = html.UnescapeString(infoValue.Content)
 		}
 		devices = append(devices, infoMap)
 	}
