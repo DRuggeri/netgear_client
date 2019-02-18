@@ -41,13 +41,7 @@ func (client *NetgearClient) GetSystemInfo() (map[string]string, error) {
 			name = name[3:]
 		}
 
-		idx := strings.Index(value, "/")
-		if idx > 0 {
-			stats[name+"Average"] = value[idx+1:]
-			stats[name] = value[0:idx]
-		} else {
-			stats[name] = value
-		}
+		stats[name] = value
 	}
 	return stats, nil
 }
