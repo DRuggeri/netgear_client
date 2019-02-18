@@ -37,6 +37,29 @@ Return:
 - **err** - Will be `nil` on success.
 
 ---
+#### `client.GetSystemInfo()`
+Obtains a map of k/v pairs with system statistics. The keys and values come exactly from the API with the following exceptions:
+- For newer APIs, the "New" prefix is removed from the keys
+
+**NOTE:** CPU utilization always seems to be 100%. This is suspected to be because gathering the statistics causes CPU strain.
+
+Usage:
+`response, error = client.GetSystemInfo()`
+
+Return:
+- **response** - *`map[string]string`* - Key/value pairs straight from the API
+- **err** - Will be `nil` on success.
+
+The current keys returned, and their format is:
+```
+AvailableFlash => unknown (float)
+CPUUtilization => percentage (int, see note)
+PhysicalMemory => megabytes (int)
+MemoryUtilization => percentage (int)
+PhysicalFlash => megabytes (int)
+```
+
+---
 #### `client.GetTrafficMeterStatistics()`
 Obtains a map of k/v pairs with traffic statistics. The keys and values come exactly from the API with the following exceptions:
 - For newer APIs, the "New" prefix is removed from the keys
