@@ -73,3 +73,54 @@ LastMonthDownloadAverage => megabytes (int?)
 LastMonthUpload => megabytes (float)
 LastMonthUploadAverage => megabytes (float)
 ```
+
+---
+#### `client.GetAttachDevice()`
+Obtains an array of maps of k/v pairs with client information.
+
+Usage:
+`response, error = client.GetAttachDevice()`
+
+Return:
+- **response** - *`[]map[string]string`* - An array of maps containing data
+- **err** - Will be `nil` on success.
+
+The current keys returned, and their format is:
+```
+IPAddress => address (string)
+Name => name (string)
+MACAddress => address (string)
+ConnectionType => wired|5G|2.4G (string)
+WirelessLinkSpeed => megabits/sec (int)
+WirelessSignalStrength => percentage (int)
+```
+
+---
+#### `client.GetAttachDevice2()`
+Obtains an array of maps of k/v pairs with client information exactly as-is from the API. While this call returns more data, it also takes longer indicating it may be more stressful on the router.
+
+Usage:
+`response, error = client.GetAttachDevice2()`
+
+Return:
+- **response** - *`[]map[string]string`* - An array of maps with key/value pairs straight from the API
+- **err** - Will be `nil` on success.
+
+The current keys returned, and their format is:
+```
+IP => address (string)
+Name => name (string)
+NameUserSet => true|false (boolean)
+MAC => address (string)
+ConnectionType => wired|5G|2.4G (string)
+SSID => name (string, sometimes empty)
+Linkspeed => megabits/sec (int, sometimes empty)
+SignalStrength => percentage (int, always 100 for wired)
+AllowOrBlock => Allow|Block (string)
+Schedule => true|false (boolean)
+DeviceType => internal id (int)
+DeviceTypeUserSet => true|false (boolean)
+Upload => unknown (float, apparently always 0.00)
+Download => unknown (float, apparently always 0.00)
+QosPriority => priority (int)
+```
