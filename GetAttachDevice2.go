@@ -32,7 +32,6 @@ func (client *NetgearClient) GetAttachDevice2() ([]map[string]string, error) {
 		return make([]map[string]string, 0), fmt.Errorf("Failed to unmarshal response from inside SOAP body: %v", err)
 	}
 
-
 	devices := make([]map[string]string, 0)
 	for _, node := range inside.Nodes[0].Nodes {
 		infoMap := make(map[string]string)
