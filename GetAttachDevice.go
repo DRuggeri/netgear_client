@@ -3,8 +3,8 @@ package netgear_client
 import (
 	"encoding/xml"
 	"fmt"
-	"strings"
 	"html"
+	"strings"
 )
 
 func (client *NetgearClient) GetAttachDevice() ([]map[string]string, error) {
