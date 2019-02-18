@@ -9,10 +9,10 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"net/url"
 	"strconv"
 	"strings"
 	"time"
-	"net/url"
 )
 
 type NetgearClient struct {
@@ -67,15 +67,27 @@ func NewNetgearClient(i_url string, i_insecure bool, i_username string, i_passwo
 		log.Printf("netgear_client.go: Constructing debug client\n")
 	}
 
-	if i_url == "" { i_url = "https://routerlogin.net" }
-	if i_username == "" { i_username = "admin" }
-	if i_password == "" { return nil, errors.New("Admin password is required") }
+	if i_url == "" {
+		i_url = "https://routerlogin.net"
+	}
+	if i_username == "" {
+		i_username = "admin"
+	}
+	if i_password == "" {
+		return nil, errors.New("Admin password is required")
+	}
 
-	if strings.HasSuffix(i_url, "/") { i_url = i_url[:len(i_url)-1] }
-	if !strings.Contains(i_url, "://") { i_url = "https://" + i_url }
+	if strings.HasSuffix(i_url, "/") {
+		i_url = i_url[:len(i_url)-1]
+	}
+	if !strings.Contains(i_url, "://") {
+		i_url = "https://" + i_url
+	}
 
 	_, err := url.Parse(i_url)
-	if err != nil { return nil, fmt.Errorf("Error parsing provided URL (%s): %v", i_url, err) }
+	if err != nil {
+		return nil, fmt.Errorf("Error parsing provided URL (%s): %v", i_url, err)
+	}
 
 	/* Disable TLS verification if requested */
 	tr := &http.Transport{
