@@ -74,19 +74,18 @@ func NewNetgearClient(i_url string, i_insecure bool, i_username string, i_passwo
 		i_username = "admin"
 	}
 	if i_password == "" {
-		return nil, errors.New("Admin password is required")
+		return nil, errors.New("admin password is required")
 	}
 
-	if strings.HasSuffix(i_url, "/") {
-		i_url = i_url[:len(i_url)-1]
-	}
+	i_url = strings.TrimSuffix(i_url, "/")
+
 	if !strings.Contains(i_url, "://") {
 		i_url = "https://" + i_url
 	}
 
 	_, err := url.Parse(i_url)
 	if err != nil {
-		return nil, fmt.Errorf("Error parsing provided URL (%s): %v", i_url, err)
+		return nil, fmt.Errorf("error parsing provided URL (%s): %v", i_url, err)
 	}
 
 	/* Disable TLS verification if requested */
@@ -106,6 +105,7 @@ func NewNetgearClient(i_url string, i_insecure bool, i_username string, i_passwo
 		cookie:     "UNSET",
 		sessionid:  SESSION_ID,
 		debug:      i_debug,
+		timeout:    i_timeout,
 	}
 
 	return &client, nil
@@ -205,12 +205,12 @@ func (client *NetgearClient) send_request(action string, data string, attempt_lo
 				}
 				continue
 			} else {
-				return []byte{}, errors.New("The netgear_client is not logged in!")
+				return []byte{}, errors.New("the netgear_client is not logged in")
 			}
 		}
 
 		return response.SOAPBody.ResponseContent, nil
 	}
 
-	return []byte{}, fmt.Errorf("Failed to execute request after %d tries", tries)
+	return []byte{}, fmt.Errorf("failed to execute request after %d tries", tries)
 }

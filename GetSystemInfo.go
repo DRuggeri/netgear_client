@@ -30,16 +30,14 @@ func (client *NetgearClient) GetSystemInfo() (map[string]string, error) {
 	var inside Node
 	err = xml.Unmarshal(response, &inside)
 	if err != nil {
-		return make(map[string]string), fmt.Errorf("Failed to unmarshal response from inside SOAP body: %v", err)
+		return make(map[string]string), fmt.Errorf("failed to unmarshal response from inside SOAP body: %v", err)
 	}
 
 	var stats = make(map[string]string)
 	for _, node := range inside.Nodes {
 		name := node.XMLName.Local
 		value := strings.Replace(node.Content, ",", "", -1)
-		if strings.HasPrefix(name, "New") {
-			name = name[3:]
-		}
+		name = strings.TrimPrefix(name, "New")
 
 		stats[name] = value
 	}

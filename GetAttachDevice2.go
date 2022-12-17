@@ -30,7 +30,7 @@ func (client *NetgearClient) GetAttachDevice2() ([]map[string]string, error) {
 	var inside Node
 	err = xml.Unmarshal(response, &inside)
 	if err != nil {
-		return make([]map[string]string, 0), fmt.Errorf("Failed to unmarshal response from inside SOAP body: %v", err)
+		return make([]map[string]string, 0), fmt.Errorf("failed to unmarshal response from inside SOAP body: %v", err)
 	}
 
 	devices := make([]map[string]string, 0)
@@ -40,7 +40,7 @@ func (client *NetgearClient) GetAttachDevice2() ([]map[string]string, error) {
 
 		err = xml.Unmarshal([]byte(node.Content), &deviceInfo)
 		if err != nil {
-			return make([]map[string]string, 0), fmt.Errorf("Failed to unmarshal response from inside SOAP body: %v", err)
+			return make([]map[string]string, 0), fmt.Errorf("failed to unmarshal response from inside SOAP body: %v", err)
 		}
 
 		for _, infoValue := range node.Nodes {
