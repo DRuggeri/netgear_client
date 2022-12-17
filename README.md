@@ -4,10 +4,10 @@ netgear_client
 Similar to [pyNetgear](https://github.com/MatMaul/pynetgear), `netgear_client` provides a Go implementation of a SOAP client for communicating with Netgear routers. Unfortunately, Netgear does not release specifications for their SOAP API, so this is primarily built by reverse engineering calls.
 
 ### Building and testing
-This simple module is straight forward to test against an existing Netgear endpoint. To perform testing, the following environment variables are needed:
-- **NETGEAR_URL** - the http endpoint to test against. This should be your router's address. If not set, will default to "https://www.routerlogin.com", which SHOULD be intercepted by your router's DNS server.
-- **NETGEAR_USERNAME** - the username for the login operation. If not set, will default to "admin"
-- **NETGEAR_PASSWORD** - the password for the login operation
+This simple module is straight forward to test against an existing Netgear endpoint. To perform testing, the following environment variables or files are needed:
+- **NETGEAR_URL** or **.netgear_url** - the http endpoint to test against. This should be your router's address. If not set, will default to "https://www.routerlogin.com", which SHOULD be intercepted by your router's DNS server.
+- **NETGEAR_USERNAME** or **.netgear_username** - the username for the login operation. If not set, will default to "admin"
+- **NETGEAR_PASSWORD** or **.netgear_password** - the password for the login operation
 
 With the environment variables set, executing `go test` will invoke tests for the various actions supported by the client.
 

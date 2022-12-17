@@ -8,10 +8,6 @@ import (
 func TestGetTrafficMeterStatistics(t *testing.T) {
 	debug := true
 
-	if get_password() == "" {
-		t.Fatal("Error: NETGEAR_PASSWORD environment variable is not set")
-	}
-
 	client, err := NewNetgearClient(get_url(), true, get_username(), get_password(), 2, debug)
 	if err != nil {
 		t.Fatalf("Error getting a client: %s", err)

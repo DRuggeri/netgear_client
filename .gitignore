@@ -10,3 +10,8 @@
 
 # Output of the go coverage tool, specifically when used with LiteIDE
 *.out
+
+# Values for test cases
+.netgear_password
+.netgear_username
+.netgear_url
