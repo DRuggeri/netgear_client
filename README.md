@@ -155,3 +155,36 @@ Upload => unknown (float, apparently always 0.00)
 Download => unknown (float, apparently always 0.00)
 QosPriority => priority (int)
 ```
+
+---
+#### `client.GetDeviceInfo()`
+Obtains a map of k/v pairs with device info. The keys and values come exactly from the API.
+
+Usage:
+`response, error = client.GetDeviceInfo()`
+
+Return:
+- **response** - *`map[string]string`* - Key/value pairs straight from the API
+- **err** - Will be `nil` on success.
+
+The current keys returned, and their format is:
+```
+Description => description (string, apparently always "Netgear Smart Wizard 3.0, specification 1.6 version")
+DeviceMode => mode (int)
+DeviceModeCapability => capable modes (string, semicolon-separated ints, e.g., "0;1")
+DeviceName => name (string)
+DeviceNameUserSet => true|false (boolean)
+FirewallVersion => version (string, e.g., "net-wall 2.0")
+FirmwareDLmethod => protocol (string, e.g., "HTTPS")
+FirmwareLastChecked => date (string, format "2023_1.28_3:15:5")
+FirmwareLastUpdate => date (string, format "2023_1.28_3:15:5")
+Firmwareversion => version (string, e.g., "V2.7.3.22")
+FirstUseDate => date (string, format "Sunday, 30 Sep 2007 01:10:03")
+ModelName => name (string)
+Otherhardwareversion => version (string, apparently always "N/A")
+OthersoftwareVersion => version (string, apparently always "N/A")
+SerialNumber => serial number (string)
+SignalStrength => strength (int)
+SmartAgentversion => version (float)
+VPNVersion => version (apparently always empty)
+```
